@@ -1,0 +1,41 @@
+.button {
+    background: burlywood ;
+}
+
+.disabled {
+    background: darkcyan;
+}
+
+.secondary {
+    background: gold;
+}
+
+.default {
+    background: brown;
+}
+
+.red {
+    background: red;
+}
+
+.default:hover {
+}
+
+.red:hover {
+}
+
+.secondary:hover {
+}
+
+
+.default:active {
+}
+
+.secondary:active {
+}
+
+.red:active {
+}
+
+.button:disabled {
+}
