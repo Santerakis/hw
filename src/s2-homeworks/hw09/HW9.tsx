@@ -8,6 +8,12 @@ import s2 from '../../s1-main/App.module.css'
 * 3 - в файле Clock.tsx дизэйблить кнопки стоп / старт если таймер не запущен / запущен соответственно
 * 4 - сделать стили в соответствии с дизайном
 * */
+let a = Date.now();
+var b = new Date().toLocaleString()
+console.log(a)
+console.log(typeof b)
+
+
 
 const HW9 = () => {
     return (
