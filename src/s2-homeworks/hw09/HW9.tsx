@@ -9,9 +9,11 @@ import s2 from '../../s1-main/App.module.css'
 * 4 - сделать стили в соответствии с дизайном
 * */
 let a = Date.now();
-var b = new Date().toLocaleString()
+let b = new Date().toLocaleDateString()
+let c = new Intl.DateTimeFormat("ru")
 console.log(a)
-console.log(typeof b)
+console.log(b)
+console.log(c)
 
 
 
