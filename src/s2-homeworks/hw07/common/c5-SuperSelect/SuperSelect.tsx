@@ -46,6 +46,7 @@ const SuperSelect: React.FC<SuperSelectPropsType> = ({
         <select
             className={finalSelectClassName}
             onChange={onChangeCallback}
+            // value={value}
             {...restProps}
         >
             {mappedOptions}
