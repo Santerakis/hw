@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react'
 import s from './HW11.module.css'
 import s2 from '../../s1-main/App.module.css'
-import { restoreState } from '../hw06/localStorage/localStorage'
+import {restoreState} from '../hw06/localStorage/localStorage'
 import SuperRange from './common/c7-SuperRange/SuperRange'
 
 /*
@@ -18,10 +18,10 @@ function HW11() {
     const change = (event: Event, value: number | number[]) => {
         // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
         Array.isArray(value) // true || false
-        if(typeof value === 'number') {
-            setValue1(value)
+        if (typeof value === 'number') {
+            setValue1(value as number)
         } else {
-            setValue1(value[0])
+            setValue1(value[0] as number)
             setValue2(value[1])
         }
 
