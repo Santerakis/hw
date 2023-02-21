@@ -66,7 +66,7 @@ const HW13 = () => {
                 }
                 setImage(getSvgFromErrorCode(e.response.status))
 
-                console.log(e.response?.data?.info || e.message)
+                console.log(e.response?.data?.info)
 
             })
     }
