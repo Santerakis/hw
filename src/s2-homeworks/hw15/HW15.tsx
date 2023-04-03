@@ -5,6 +5,7 @@ import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
 import {useSearchParams} from 'react-router-dom'
 import SuperSort from './common/c10-SuperSort/SuperSort'
+import {Pagination} from "@mui/material";
 
 /*
 * 1 - дописать SuperPagination
@@ -28,13 +29,15 @@ type ParamsType = {
 }
 
 const getTechs = (params: ParamsType) => {
+    console.log('params:', params)
     return axios
         .get<{ techs: TechType[], totalCount: number }>(
             'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test3',
             {params}
         )
         .catch((e) => {
-            alert(e.response?.data?.errorText || e.message)
+            alert(e.response?.data?.errorText || e.message)  //back error || axios/network error
+            console.log(e)
         })
 }
 
@@ -52,23 +55,24 @@ const HW15 = () => {
         getTechs(params)
             .then((res) => {
                 // делает студент
-
                 // сохранить пришедшие данные
-
-                //
+                res && setTechs(res.data.techs)
+                setLoading(false)
             })
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
-
         // setPage(
         // setCount(
-
         // sendQuery(
         // setSearchParams(
 
-        //
+        setPage(newPage)
+        setCount(newCount)
+        sendQuery({newPage, newCount})
+        setSearchParams()
+
     }
 
     const onChangeSort = (newSort: string) => {
@@ -104,7 +108,17 @@ const HW15 = () => {
 
     return (
         <div id={'hw15'}>
-            <div className={s2.hwTitle}>Homework #15</div>
+
+            {/**/}
+            <Pagination
+                page={2}
+                count={100}
+                onChange={() => {
+                }}
+            />
+            {/**/}
+
+            <div className={s2.hwTitle}>Homework_#15</div>
 
             <div className={s2.hw}>
                 {idLoading && <div id={'hw15-loading'} className={s.loading}>Loading...</div>}

@@ -14,15 +14,16 @@ import {useSearchParams} from 'react-router-dom'
 * */
 
 const getTechs = (find: string) => {
+    // console.log('dal: ', find)
     return axios
         .get<{ techs: string[] }>(
             'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test2',
             {params: {find}}
         )
-        .then(res => res.data)
+        .then(res => res.data)               //я доисал
         .catch((e) => {
             alert(e.response?.data?.errorText || e.message)
-            return {techs: []} //чтобы не присать потом if
+            return {techs: []}              //чтобы не присать потом if
         })
 }
 
@@ -42,26 +43,26 @@ const HW14 = () => {
                 // if (res){
                 setTechs(res.techs)
                 setLoading(false)
-                console.log(res.techs)
+                // console.log(res.techs)
                 // }
             })
     }
 
     const onChangeText = (value: string) => {
-        setFind(value)
         // делает студент
         // добавить/заменить значение в квери урла
         // setSearchParams(
-        //
+        setFind(value)
         setSearchParams({find: value})
 
     }
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams)
-        sendQuery(params.find || '')
+        // sendQuery(params.find || '')
         setFind(params.find || '')
-        // console.log('params: ', )
+        // console.log('params: ', params)
+        // console.log('searchParams: ', searchParams)
     }, [])
 
     const mappedTechs = techs.map(t => (
