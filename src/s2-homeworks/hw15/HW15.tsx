@@ -51,7 +51,7 @@ const HW15 = () => {
     const [techs, setTechs] = useState<TechType[]>([])
 
     const sendQuery = (params: any) => {
-        setLoading(true)
+        // setLoading(true)
         getTechs(params)
             .then((res) => {
                 // делает студент
@@ -60,7 +60,7 @@ const HW15 = () => {
                     setTechs(res.data.techs)
                     setTotalCount(res.data.totalCount)
                     setLoading(false)
-                    console.log('res: ', res)
+                    // console.log('res: ', res)
                 }
             })
     }
@@ -71,27 +71,67 @@ const HW15 = () => {
         // setCount(
         // sendQuery(
         // setSearchParams(
-
+        // if (newPage === 3 || newCount !== count) setLoading(true)
+        //
+        // setPage(newPage)
+        // setCount(newCount)
+        // sendQuery({sort, page: newPage, count: newCount})
+        // setSearchParams({sort, page: newPage+'', count: newCount+''})
         setPage(newPage)
         setCount(newCount)
-        sendQuery({page: newPage, count: newCount})
-        setSearchParams()
+        const pageQuery: { page?: string } = newPage !== 1 ? {page: newPage + ''} : {} // если стандарт - то не записывать в урл
+        const countQuery: { count?: string } = newCount !== 4 ? {count: newCount + ''} : {} // если стандарт - то не записывать в урл
+        const {count, page, ...lastQueries} = Object.fromEntries(searchParams)
+
+        const allQuery = {...lastQueries, ...pageQuery, ...countQuery}
+        sendQuery(allQuery)
+        setSearchParams(allQuery)
 
     }
+
+
+    // setPage(newPage)
+    // setCount(newCount)
+    // const pageQuery: { page?: string } = newPage !== 1 ? {page: newPage + ''} : {} // если стандарт - то не записывать в урл
+    // const countQuery: { count?: string } = newCount !== 4 ? {count: newCount + ''} : {} // если стандарт - то не записывать в урл
+    // const {count, page, ...lastQueries} = Object.fromEntries(searchParams)
+    //
+    // const allQuery = {...lastQueries, ...pageQuery, ...countQuery}
+    // sendQuery(allQuery)
+    // setSearchParams(allQuery)
+
+
+    //
+    // const onChangeSort = (newSort: string) => {
+    //     // делает студент
+    //     // setSort(
+    //     // setPage(1) // при сортировке сбрасывать на 1 страницу
+    //     // sendQuery(
+    //     // setSearchParams(
+    //     setLoading(true)
+    //     setSort(newSort)
+    //     setPage(1) // при сортировке сбрасывать на 1 страницу
+    //     sendQuery({sort, page, count})
+    //     setSearchParams({...Object.fromEntries(searchParams), sort: newSort})
+    // }
 
     const onChangeSort = (newSort: string) => {
         // делает студент
 
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
+        setSort(newSort)
+        setPage(1) // при сортировке сбрасывать на 1 страницу
+        const sortQuery: { sort?: string } = newSort !== '' ? {sort: newSort} : {} // если стандарт - то не записывать в урл
+        const {sort, page, ...lastQueries} = Object.fromEntries(searchParams)
 
-        // sendQuery(
-        // setSearchParams(
+        const allQuery = {...lastQueries, ...sortQuery}
+        sendQuery(allQuery)
+        setSearchParams(allQuery)
 
         //
     }
 
     useEffect(() => {
+        // debugger
         const params = Object.fromEntries(searchParams)
         sendQuery({page: params.page, count: params.count})
         setPage(+params.page || 1)
@@ -112,15 +152,6 @@ const HW15 = () => {
 
     return (
         <div id={'hw15'}>
-
-            {/**/}
-            <Pagination
-                page={2}
-                count={100}
-                onChange={() => {
-                }}
-            />
-            {/**/}
 
             <div className={s2.hwTitle}>Homework_#15</div>
 
