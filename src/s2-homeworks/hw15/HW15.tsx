@@ -51,6 +51,7 @@ const HW15 = () => {
     const [techs, setTechs] = useState<TechType[]>([])
 
     const sendQuery = (params: any) => {
+        debugger
         // setLoading(true)
         getTechs(params)
             .then((res) => {
@@ -77,6 +78,7 @@ const HW15 = () => {
         // setCount(newCount)
         // sendQuery({sort, page: newPage, count: newCount})
         // setSearchParams({sort, page: newPage+'', count: newCount+''})
+        debugger
         setPage(newPage)
         setCount(newCount)
         const pageQuery: { page?: string } = newPage !== 1 ? {page: newPage + ''} : {} // если стандарт - то не записывать в урл
@@ -84,7 +86,9 @@ const HW15 = () => {
         const {count, page, ...lastQueries} = Object.fromEntries(searchParams)
 
         const allQuery = {...lastQueries, ...pageQuery, ...countQuery}
+
         sendQuery(allQuery)
+        debugger
         setSearchParams(allQuery)
 
     }
